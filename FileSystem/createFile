@@ -1,0 +1,14 @@
+var fs = require('fs');
+
+var text = "Aprende Nodejs";
+
+fs.writeFile("archivo", text, function (error) {
+    if (error) {
+        throw error;
+    } else {
+        console.log('Archivo creado');
+    }
+});
+
+
+console.log("Comensando a escribir el archivo");
