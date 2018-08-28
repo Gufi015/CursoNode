@@ -1,7 +1,7 @@
 var conversion = require('./conversion');
 
 var pulgadas = 3;
-var millas = 5;
+var millas = 25;
 console.log(pulgadas + " Pulgadas son: "+ 
 conversion.pulgadasaMetros(pulgadas) + " Metros.");
 
