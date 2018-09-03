@@ -12,12 +12,12 @@ var servidor = http.createServer(function (llamado, respuesta) {
             respuesta.end(contenido);
         })
     } else if (llamado.url.match(/.css$/)) {
-        fs.readFile('.', llamado.url, 'UTF-8', function (error, contenido) {
+        fs.readFile('./', llamado.url, 'UTF-8', function (error, contenido) {
             respuesta.writeHead(200, { 'Content-Type': 'text/css' });
             respuesta.end(contenido);
         })
     } else if (llamado.url.match(/.png$/)) {
-        fs.readFile('.', llamado.url, function (error, contenido) {
+        fs.readFile('./', llamado.url, function (error, contenido) {
             if (error) {
                 respuesta.writeHead(404, { 'content-type': 'text/html' });
                 respuesta.end('<h1>404 not found La imagen no existe! </h1>');
