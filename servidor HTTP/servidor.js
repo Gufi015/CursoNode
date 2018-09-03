@@ -10,9 +10,23 @@ var servidor = http.createServer(function (llamado, respuesta) {
         fs.readFile('./index.html', 'UTF-8', function (error, contenido) {
             respuesta.writeHead(200, { 'Content-Type': 'text/html' });
             respuesta.end(contenido);
-        });
-    } else {
-
+        })
+    } else if (llamado.url.match(/.css$/)) {
+        fs.readFile('.', llamado.url, 'UTF-8', function (error, contenido) {
+            respuesta.writeHead(200, { 'Content-Type': 'text/css' });
+            respuesta.end(contenido);
+        })
+    } else if (llamado.url.match(/.png$/)) {
+        fs.readFile('.', llamado.url, function (error, contenido) {
+            if (error) {
+                respuesta.writeHead(404, { 'content-type': 'text/html' });
+                respuesta.end('<h1>404 not found La imagen no existe! </h1>');
+            }
+            respuesta.writeHead(200, { 'Content-Type': 'image/png' });
+            respuesta.end(contenido);
+        })
+    }
+    else {
         respuesta.writeHead(404, { 'content-type': 'text/html' });
         respuesta.end('<h1>404 not found! </h1>');
     }
