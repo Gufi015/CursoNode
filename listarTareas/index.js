@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var session = require('cookie-session');
 
 var app = express();
+app.use('virtual', express.static('views'));
 
 app.use(session({ secret: 'nodejs' }));
 app.use(bodyParser.urlencoded({ extended: false }));
