@@ -1,0 +1,17 @@
+{
+  "name": "lista_de_tareas",
+  "version": "1.0.0",
+  "description": "Aplicación de listado de tareas",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rufino Rojas",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cookie-session": "^2.0.0-beta.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3"
+  }
+}
