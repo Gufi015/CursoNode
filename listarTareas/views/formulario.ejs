@@ -21,7 +21,12 @@
     <div class="jumbotron">
         <h1>Listar Tareas</h1>
         <ul>
-
+            <% tareas.forEach(function(tarea, id){%>
+                <li>
+                    <%= tarea %>
+                        <a class="badge" href="/borar/<%=id%>">X</a>
+                </li>
+                <%});%>
         </ul>
         <form action="adicionar/" method="POST">
             <p>
