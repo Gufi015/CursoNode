@@ -28,6 +28,7 @@
 
         #ventanaChat {
             height: 400px;
+            /*width: 500px;*/
         }
 
         #seccionUsuarios {
@@ -60,7 +61,7 @@
                     <div class="input-group">
                         <input id="mensaje" class="form-control">
                         <span class="input-group-btn">
-                            <button class="btn btn-primary" type="button">Enviar</button>
+                            <button class="btn btn-primary" type="submit">Enviar</button>
                         </span>
                     </div>
                 </form>
@@ -84,7 +85,7 @@
             var listaUsuarios = $('#listaUsuarios');
 
             var mensaje = $('#mensaje');
-            var chat = $('ventanaChat');
+            var chat = $('#ventanaChat');
 
             formularioUsuario.submit(function (evento) {
                 evento.preventDefault();
@@ -97,10 +98,34 @@
                         $('#error').html('El nombre ya existe!');
                         $('#error').show();
                     }
+
+                    console.log('Aquí agrega al usuario!');
                 });
                 usuario.val('');
-            })
-        })
+
+                socket.on('actualizarUsuarios', function (usuarios) {
+                    var html = '';
+
+                    usuarios.forEach(function (usuario) {
+                        html += usuario + '<br/>';
+                    });
+
+                    listaUsuarios.html(html);
+                });
+
+                formularioChat.submit(function (evento) {
+                    evento.preventDefault();
+                    socket.emit('nuevo mensaje', mensaje.val());
+                    mensaje.val('');
+
+                    console.log('Mensaje Enviado');
+                });
+
+                socket.on('mensaje', function (data) {
+                    chat.append('<strong>' + data.usuario + '</strong> - ' + data.mensaje + '<br/>');
+                });
+            });
+        });
 
     </script>
 </body>

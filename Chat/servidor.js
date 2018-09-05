@@ -24,17 +24,22 @@ io.on('connection', function (socket) {
             callback(true);
             socket.usuario = usuario;
             usuarios.push(usuario);
-
             actualizarUsuarios();
+            io.emit('mensaje', { mensaje: 'se ha conectado', usuario: socket.usuario });
         }
     });
 
-    socket.on('mensaje', function (mensaje) {
+    socket.on('nuevo mensaje', function (mensaje) {
         io.emit('mensaje', { mensaje: mensaje, usuario: socket.usuario });
     });
 
     function actualizarUsuarios() {
         io.emit('actualizarUsuarios', usuarios);
-    }
+    };
+
+    socket.on('disconnect', function (data) {
+        usuarios.splice(usuarios.indexOf(socket.usuario), 1);
+        io.emit('mensaje', { mensaje: 'se ha desconectado', usuario: socket.usuario });
+    });
 
 });
